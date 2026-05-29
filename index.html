@@ -81,22 +81,35 @@
   .topnav.condensed .nav-right{display:none}
   .topnav.condensed .nav-hamburger{display:flex}
 
-  /* Open menu drops a panel below the hamburger containing all links */
-  .topnav.condensed.menu-open::after{
-    content:"";
-    position:fixed;inset:0;z-index:-1;
-  }
-  .topnav.condensed.menu-open .nav-left,
-  .topnav.condensed.menu-open .nav-right{
-    display:flex;flex-direction:column;align-items:flex-end;gap:14px;
-    position:fixed;right:28px;
-    background:rgba(20,20,20,0.95);backdrop-filter:blur(8px);
-    padding:18px 24px;border-radius:14px;
+  /* Single dropdown panel: appears when condensed + menu-open.
+     The original nav-left / nav-right stay hidden via .condensed rules above. */
+  .nav-dropdown{
+    display:none;
+    position:fixed;top:96px;right:28px;
+    flex-direction:column;align-items:stretch;gap:14px;
+    min-width:200px;
+    background:rgba(20,20,20,0.95);
+    backdrop-filter:blur(8px);
+    padding:20px 24px;
+    border-radius:14px;
     box-shadow:0 14px 40px rgba(0,0,0,0.35);
-    grid-column:unset;
+    text-align:right;
   }
-  .topnav.condensed.menu-open .nav-left{top:90px}
-  .topnav.condensed.menu-open .nav-right{top:240px}
+  .topnav.condensed.menu-open .nav-dropdown{display:flex}
+  .nav-dropdown a{
+    color:#fff;text-decoration:none;
+    padding:4px 0;
+    font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+    transition:opacity .2s ease;
+  }
+  .nav-dropdown a:hover{opacity:0.75}
+  .nav-dropdown .nav-cta{
+    margin-top:8px;
+    padding:10px 20px;border-radius:999px;
+    background:#F67D45;text-align:center;
+    transition:background .2s ease;
+  }
+  .nav-dropdown .nav-cta:hover{background:#E5683A;opacity:1}
   /* Animate to X when open */
   .topnav.menu-open .nav-hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .topnav.menu-open .nav-hamburger span:nth-child(2){opacity:0}
@@ -151,6 +164,12 @@
   </div>
   <a class="nav-center" href="#section-hero">Just Health &amp; Safety</a>
   <div class="nav-right">
+    <a href="#section-cta" class="nav-cta">Get Involved</a>
+  </div>
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="#section-whatis">Diversion</a>
+    <a href="#section-facts">The Facts</a>
+    <a href="#section-stake">What&rsquo;s at Stake</a>
     <a href="#section-cta" class="nav-cta">Get Involved</a>
   </div>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
